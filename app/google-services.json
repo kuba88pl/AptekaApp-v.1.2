@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "514204624307",
+    "project_id": "aptekaapp-v2",
+    "storage_bucket": "aptekaapp-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514204624307:android:f0c2ad91643028b4e057c6",
+        "android_client_info": {
+          "package_name": "com.kuba88pl.aptekaappv2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhu9-51mmcQo6lV2Omnd9vZq1Dxssr0iI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

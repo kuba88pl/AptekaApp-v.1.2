@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AptekaAppV2</string>
+    <string name="first_slide">Wszystko, czego potrzebujesz</string>
+    <string name="second_slide">Wybierz swój produkt</string>
+    <string name="third_slide">Szybka dostawa</string>
+    <string name="description">Zgromadzililśmy w jednym miejscu...Witaj w naszej Aptece Internetowej,
+świeżej, pachnącej i całkiem nowej.
+Zaczniemy więc najpierw od przedstawienia,
+że dokonujesz zakupów w polskiej firmie bez obcego mienia.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
