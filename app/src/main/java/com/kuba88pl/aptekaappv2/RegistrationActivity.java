@@ -1,5 +1,6 @@
 package com.kuba88pl.aptekaappv2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,10 +10,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     EditText name, email, password;
 
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,10 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void signup(View view) {
+
+
+
+        auth = FirebaseAuth.getInstance();
 
         String userName = name.getText().toString();
         String userEmail = email.getText().toString();
@@ -50,7 +61,21 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
-        startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+        auth.createUserWithEmailAndPassword(userEmail, userPassword)
+                        .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if(task.isSuccessful()){
+                                    Toast.makeText(RegistrationActivity.this, "Pomyślnie utoworzono konto!", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+                                }
+                                else {
+                                    Toast.makeText(RegistrationActivity.this, "Błąd przy zakładaniu konta. Spróbuj ponownie." +task.getException(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
 
     }
 
