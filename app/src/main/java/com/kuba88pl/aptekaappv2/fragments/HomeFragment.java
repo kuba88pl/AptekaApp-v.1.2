@@ -36,6 +36,9 @@ public class HomeFragment extends Fragment {
         slideModels.add(new SlideModel(R.drawable.banner1,"Ibuprom w niższej cenie!", ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel(R.drawable.banner2,"Na męskie problemy!", ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel(R.drawable.banner3,"Coś dobrego dla Twojego dziecka!", ScaleTypes.CENTER_CROP));
+
+        imageSlider.setImageList(slideModels);
+
         return root;
     }
 }
