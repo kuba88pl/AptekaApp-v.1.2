@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/welcome"
-    tools:context=".activities.LoginActivity">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -73,7 +73,7 @@
         android:alpha="0.85"
         android:background="#2196F3"
         android:backgroundTint="@color/button_color"
-        android:onClick="signin"
+        android:onClick="signIn"
         android:padding="15dp"
         android:text="Zaloguj"
         android:textAllCaps="false"
@@ -109,6 +109,7 @@
         android:textColor="@color/logincolor"
         android:textSize="19sp"
         android:textStyle="bold"
+        android:onClick="signUp"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2"
