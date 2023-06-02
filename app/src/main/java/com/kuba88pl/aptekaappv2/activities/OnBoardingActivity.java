@@ -1,8 +1,9 @@
-package com.kuba88pl.aptekaappv2;
+package com.kuba88pl.aptekaappv2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.kuba88pl.aptekaappv2.R;
+import com.kuba88pl.aptekaappv2.adapters.SliderAdapter;
 
 public class OnBoardingActivity extends AppCompatActivity {
 
@@ -45,6 +49,14 @@ public class OnBoardingActivity extends AppCompatActivity {
         //Call Adapter
         sliderAdapter = new SliderAdapter(this);
         viewPager.setAdapter(sliderAdapter);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OnBoardingActivity.this, RegistrationActivity.class));
+                finish();
+            }
+        });
     }
 
     private void addDots(int position) {

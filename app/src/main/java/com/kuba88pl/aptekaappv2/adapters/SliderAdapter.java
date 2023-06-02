@@ -1,4 +1,4 @@
-package com.kuba88pl.aptekaappv2;
+package com.kuba88pl.aptekaappv2.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.kuba88pl.aptekaappv2.R;
 
 public class SliderAdapter extends PagerAdapter {
 

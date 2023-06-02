@@ -1,9 +1,10 @@
-package com.kuba88pl.aptekaappv2;
+package com.kuba88pl.aptekaappv2.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,12 +15,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.kuba88pl.aptekaappv2.R;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     EditText name, email, password;
 
     private FirebaseAuth auth;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +33,24 @@ public class RegistrationActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+
+        sharedPreferences = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
+
+        boolean isFistTime = sharedPreferences.getBoolean("firstTime", true);
+
+        if (isFistTime) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.putBoolean("firstTime", false);
+            editor.commit();
+
+            Intent intent = new Intent(RegistrationActivity.this, OnBoardingActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void signup(View view) {
-
-
 
         auth = FirebaseAuth.getInstance();
 
