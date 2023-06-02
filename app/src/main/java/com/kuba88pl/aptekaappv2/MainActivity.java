@@ -1,10 +1,8 @@
-package com.kuba88pl.aptekaappv2.activities;
+package com.kuba88pl.aptekaappv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.kuba88pl.aptekaappv2.R;
 
 public class MainActivity extends AppCompatActivity {
 
