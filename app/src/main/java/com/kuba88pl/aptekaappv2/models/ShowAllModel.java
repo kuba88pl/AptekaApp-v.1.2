@@ -1,18 +1,17 @@
 package com.kuba88pl.aptekaappv2.models;
 
-import java.io.Serializable;
+public class ShowAllModel {
 
-public class PopularProductsModel implements Serializable {
     String description;
     String name;
     String rating;
     String price;
     String img_url;
 
-    public PopularProductsModel() {
+    public ShowAllModel() {
     }
 
-    public PopularProductsModel(String description, String name, String rating, String price, String img_url) {
+    public ShowAllModel(String description, String name, String rating, String price, String img_url) {
         this.description = description;
         this.name = name;
         this.rating = rating;

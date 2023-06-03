@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.HomeFragment"
+    android:background="@color/white">
 
 
 
@@ -72,7 +73,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="#2365B9FE"
+                android:outlineSpotShadowColor="@color/white"
+                android:outlineAmbientShadowColor="@color/white">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -114,7 +118,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
                     android:layout_marginTop="6dp"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -143,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/popular_products"
                     android:layout_marginLeft="9dp"
-                    android:text="Najczęściej kupują" />
+                    android:text="Sprawdź, po co najczęściej sięgają nasi klienci" />
 
                 <TextView
                     android:id="@+id/popular_see_all"

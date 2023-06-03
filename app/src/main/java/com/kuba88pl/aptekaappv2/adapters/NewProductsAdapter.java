@@ -1,6 +1,8 @@
 package com.kuba88pl.aptekaappv2.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.kuba88pl.aptekaappv2.R;
+import com.kuba88pl.aptekaappv2.activities.DetailedActivity;
 import com.kuba88pl.aptekaappv2.models.NewProductsModel;
 
 import java.util.List;
@@ -33,12 +36,22 @@ public class NewProductsAdapter extends RecyclerView.Adapter<NewProductsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) { // in orginal was only int position, there was an error, so
+        // i added @SuppressLint("RecyclerView") before int position
 
         Glide.with(context).load(list.get(position).getImg_url()).into(holder.newImg);
         holder.newName.setText(list.get(position).getName());
         //It was a problem with parsing from int to string. Firestore price values changed to String
-        holder.newPrice.setText(list.get(position).getPrice());
+        holder.newPrice.setText(String.valueOf(list.get(position).getPrice()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailedActivity.class);
+                intent.putExtra("detailed", list.get(position));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
