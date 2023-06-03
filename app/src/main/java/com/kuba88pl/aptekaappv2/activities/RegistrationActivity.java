@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.kuba88pl.aptekaappv2.R;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -24,6 +25,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth auth;
 
     SharedPreferences sharedPreferences;
+
+    private void updateUI(FirebaseUser currentUser) {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                                 }
                                 else {
-                                    Toast.makeText(RegistrationActivity.this, "Błąd przy zakładaniu konta. Spróbuj ponownie." +task.getException(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegistrationActivity.this, "Błąd przy zakładaniu konta. Spróbuj ponownie." + task.getException(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
