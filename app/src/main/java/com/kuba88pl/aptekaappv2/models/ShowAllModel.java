@@ -1,6 +1,8 @@
 package com.kuba88pl.aptekaappv2.models;
 
-public class ShowAllModel {
+import java.io.Serializable;
+
+public class ShowAllModel implements Serializable {
 
     String description;
     String name;

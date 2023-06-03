@@ -1,6 +1,7 @@
 package com.kuba88pl.aptekaappv2.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.kuba88pl.aptekaappv2.R;
+import com.kuba88pl.aptekaappv2.activities.DetailedActivity;
 import com.kuba88pl.aptekaappv2.models.ShowAllModel;
 
 import org.w3c.dom.Text;
@@ -39,8 +41,17 @@ public class ShowAllAdapter extends RecyclerView.Adapter<ShowAllAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Glide.with(context).load(list.get(position).getImg_url()).into(holder.mItemImage);
-        holder.mCost.setText(String.valueOf(list.get(position).getPrice()));
+        holder.mCost.setText(list.get(position).getPrice() + " PLN");
         holder.mName.setText(list.get(position).getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailedActivity.class);
+                intent.putExtra("detailed", list.get(position));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
