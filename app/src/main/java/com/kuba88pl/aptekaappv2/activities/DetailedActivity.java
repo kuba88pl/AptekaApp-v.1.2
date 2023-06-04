@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,9 +29,16 @@ import java.util.HashMap;
 public class DetailedActivity extends AppCompatActivity {
 
     ImageView detailedImg;
-    TextView rating, name, description, price;
+    TextView rating, name, description, price, quantity;
     Button addToCart, buyNow;
     ImageView addItems, removeItems;
+
+    int totalQuantity = 1;
+    int totalPrice = 0;
+    String totalPriceToString; //tutaj wynik finalny - to ma wyswietlac activity
+    int totalPricetoInt; // na potrzeby dodawania cen lub przypisania wartosci do int totalPrice;
+    String totalQuantityToString; // to ma wyswietlac activity
+    int totalQuantityToInt;
 
     //New Products
     NewProductsModel newProductsModel = null;
@@ -62,6 +70,7 @@ public class DetailedActivity extends AppCompatActivity {
         }
 
         detailedImg = findViewById(R.id.detailed_img);
+        quantity = findViewById(R.id.quantity);
         name = findViewById(R.id.detailed_name);
         rating = findViewById(R.id.rating);
         description = findViewById(R.id.detailed_desc);
@@ -73,6 +82,11 @@ public class DetailedActivity extends AppCompatActivity {
         addItems = findViewById(R.id.add_item);
         removeItems = findViewById(R.id.remove_item);
 
+//        addItems.bringToFront();
+//        removeItems.bringToFront();
+//        quantity.bringToFront();
+
+
 
         //New Products
         if(newProductsModel != null) {
@@ -81,6 +95,17 @@ public class DetailedActivity extends AppCompatActivity {
             rating.setText(newProductsModel.getRating());
             description.setText(newProductsModel.getDescription());
             price.setText(String.valueOf(newProductsModel.getPrice()));
+
+            totalPriceToString = newProductsModel.getPrice();
+            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
+            totalPriceToString = String.valueOf(totalPricetoInt);
+            totalPrice += totalPricetoInt; //totalprice
+
+            totalQuantityToString = String.valueOf(totalQuantity);
+            totalQuantityToInt = Integer.parseInt(totalQuantityToString);
+            totalQuantity += totalQuantityToInt;
+//            totalPrice = newProductsModel.getPrice() * totalQuantity;
+
         }
 
         //Popular Products
@@ -90,6 +115,19 @@ public class DetailedActivity extends AppCompatActivity {
             rating.setText(popularProductsModel.getRating());
             description.setText(popularProductsModel.getDescription());
             price.setText(String.valueOf(popularProductsModel.getPrice()));
+
+            totalPriceToString = popularProductsModel.getPrice();
+            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
+            totalPriceToString = String.valueOf(totalPricetoInt);
+            totalPrice += totalPricetoInt;
+
+            totalQuantityToString = String.valueOf(totalQuantity);
+            totalQuantityToInt = Integer.parseInt(totalQuantityToString);
+            totalQuantity += totalQuantityToInt;
+
+//            totalPrice = popularProductsModel.getPrice() * totalQuantity;
+
+
         }
 
         //Show All Products
@@ -99,6 +137,17 @@ public class DetailedActivity extends AppCompatActivity {
             rating.setText(showAllModel.getRating());
             description.setText(showAllModel.getDescription());
             price.setText(String.valueOf(showAllModel.getPrice()));
+
+            totalPriceToString = showAllModel.getPrice();
+            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
+            totalPriceToString = String.valueOf(totalPricetoInt);
+            totalPrice += totalPricetoInt;
+
+            totalQuantityToString = String.valueOf(totalQuantity);
+            totalQuantityToInt = Integer.parseInt(totalQuantityToString);
+            totalQuantity += totalQuantityToInt;
+//            totalPrice = showAllModel.getPrice() * totalQuantity;
+
         }
 
         addToCart.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +175,8 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("productPrice", price.getText().toString());
         cartMap.put("currentTime", saveCurrentTime);
         cartMap.put("currentDate", saveCurrentDate);
+        cartMap.put("totalQuantity", totalQuantityToString);
+        cartMap.put("totalPrice", totalPrice);
 
         firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -136,7 +187,46 @@ public class DetailedActivity extends AppCompatActivity {
                     }
                 });
 
+        addItems.setClickable(true);
 
+        addItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DetailedActivity.this,
+                        "The favorite list would appear on clicking this icon",
+                        Toast.LENGTH_LONG).show();
+                if (totalQuantity < 10) {
+                    totalQuantity++;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(totalQuantityToString);
+                }
+            }
+        });
+
+
+
+
+        removeItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(totalQuantity > 1){
+                    totalQuantity--;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(totalQuantityToString);
+                }
+            }
+        });
 
     }
+
+
 }
+
+
+
+
