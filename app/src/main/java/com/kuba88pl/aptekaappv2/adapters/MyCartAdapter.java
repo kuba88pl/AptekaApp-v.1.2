@@ -9,20 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kuba88pl.aptekaappv2.R;
+import com.kuba88pl.aptekaappv2.activities.CartActivity;
 import com.kuba88pl.aptekaappv2.models.MyCartModel;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-import io.grpc.Context;
+import android.content.Context;
 
 public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder> {
 
     Context context;
     List<MyCartModel> list;
 
-    public MyCartAdapter(Context context, List<MyCartModel> list) {
+    public MyCartAdapter(CartActivity context, List<MyCartModel> list) {
         this.context = context;
         this.list = list;
     }

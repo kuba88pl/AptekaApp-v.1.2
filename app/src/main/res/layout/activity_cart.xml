@@ -24,31 +24,32 @@
         android:id="@+id/sum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@color/my_cart_background"
+        android:fontFamily="@font/roboto"
         android:gravity="center"
+        android:padding="18dp"
         android:text="SUMA : 40 PLN "
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintToptoBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_cart_toolbar"
-        app:layout_constraintWidth_percent=".9"
-        android:layout_marginTop="10dp"
-        android:padding="18dp"
-        android:fontFamily="@font/roboto" />
+        app:layout_constraintWidth_percent=".9" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_rec"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".9"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sum"
-        tools:listitem="@layout/my_cart_item"
-        />
+        app:layout_constraintWidth_percent=".9"
+        tools:listitem="@layout/my_cart_item" />
 
     <Button
         android:id="@+id/buy_now"
@@ -57,15 +58,17 @@
         android:backgroundTint="#8AE53935"
         android:drawableLeft="@drawable/baseline_shopping_cart_24"
         android:drawableTint="@color/white"
+        android:padding="14dp"
         android:text="Kup teraz"
         android:textAllCaps="false"
-        android:textStyle="bold"
         android:textSize="20sp"
-        android:padding="14dp"
+        android:textStyle="bold"
         app:cornerRadius="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/cart_rec"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sum"
         app:layout_constraintWidth_percent=".9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
