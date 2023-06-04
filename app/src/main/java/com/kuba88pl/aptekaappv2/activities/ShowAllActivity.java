@@ -32,6 +32,8 @@ public class ShowAllActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all);
 
+        String type = getIntent().getStringExtra("type");
+
         firestore = FirebaseFirestore.getInstance();
 
         recyclerView = findViewById(R.id.show_all_rec);
@@ -40,20 +42,149 @@ public class ShowAllActivity extends AppCompatActivity {
         showAllAdapter = new ShowAllAdapter(this, showAllModelList);
         recyclerView.setAdapter(showAllAdapter);
 
-        firestore.collection("NewProducts")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//        firestore.collection("NewProducts")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//
+//                            if (task.isSuccessful()){
+//                                for (DocumentSnapshot doc :task.getResult().getDocuments()) {
+//                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+//                                    showAllModelList.add(showAllModel);
+//                                    showAllAdapter.notifyDataSetChanged();
+//                                }
+//                            }
+//                    }
+//                });
 
-                            if (task.isSuccessful()){
-                                for (DocumentSnapshot doc :task.getResult().getDocuments()) {
+        if (type == null || type.isEmpty()) {
+            firestore.collection("ShowAll")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                                     ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
                                     showAllModelList.add(showAllModel);
                                     showAllAdapter.notifyDataSetChanged();
                                 }
                             }
-                    }
-                });
+                        }
+                    });
+        }
+
+        if (type != null && type.equalsIgnoreCase("bezRecepty")) {
+            firestore.collection("ShowAll").whereEqualTo("type", "bezRecepty")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+
+        if (type != null && type.equalsIgnoreCase("naRecepte")) {
+            firestore.collection("ShowAll").whereEqualTo("type", "naRecepte")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+
+        if (type != null && type.equalsIgnoreCase("suplements")) {
+            firestore.collection("ShowAll").whereEqualTo("type", "suplements")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+
+        if (type != null && type.equalsIgnoreCase("inne")) {
+            firestore.collection("ShowAll").whereEqualTo("type", "inne")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+            if (type != null && type.equalsIgnoreCase("kosmetyki")) {
+                firestore.collection("ShowAll").whereEqualTo("type", "kosmetyki")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                if (task.isSuccessful()) {
+                                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                        ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                        showAllModelList.add(showAllModel);
+                                        showAllAdapter.notifyDataSetChanged();
+                                    }
+                                }
+                            }
+                        });
+
+
+
+        }
+
+        if (type != null && type.equalsIgnoreCase("sprzet")) {
+            firestore.collection("ShowAll").whereEqualTo("type", "sprzet")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ShowAllModel showAllModel = doc.toObject(ShowAllModel.class);
+                                    showAllModelList.add(showAllModel);
+                                    showAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+
     }
 }
