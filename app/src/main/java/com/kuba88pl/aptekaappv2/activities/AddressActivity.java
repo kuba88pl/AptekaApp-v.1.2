@@ -21,6 +21,9 @@ import com.kuba88pl.aptekaappv2.R;
 import com.kuba88pl.aptekaappv2.adapters.AddressAdapter;
 import com.kuba88pl.aptekaappv2.models.AddressModel;
 import com.kuba88pl.aptekaappv2.models.MyCartModel;
+import com.kuba88pl.aptekaappv2.models.NewProductsModel;
+import com.kuba88pl.aptekaappv2.models.PopularProductsModel;
+import com.kuba88pl.aptekaappv2.models.ShowAllModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +49,9 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
         toolbar = findViewById(R.id.address_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //get Data from detailedActivity
+        Object obj = getIntent().getSerializableExtra("item");
 
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -80,7 +86,23 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
         paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddressActivity.this, PaymentActivity.class));
+
+              double ammount = 0.0;
+              if (obj instanceof NewProductsModel) {
+                  NewProductsModel newProductsModel = (NewProductsModel) obj;
+                  ammount = Double.parseDouble(newProductsModel.getPrice());
+              }
+                if (obj instanceof PopularProductsModel) {
+                    PopularProductsModel popularProductsModel = (PopularProductsModel) obj;
+                    ammount = Double.parseDouble(popularProductsModel.getPrice());
+                }
+                if (obj instanceof ShowAllModel) {
+                    ShowAllModel showAllModel = (ShowAllModel) obj;
+                    ammount = Double.parseDouble(showAllModel.getPrice());
+                }
+                Intent intent = new Intent(AddressActivity.this, PaymentActivity.class);
+                intent.putExtra("ammount", ammount);
+                startActivity(intent);
             }
         });
 
