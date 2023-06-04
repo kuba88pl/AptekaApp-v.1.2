@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button_color">#D72020</color>
     <color name="logincolor">#00BCD4</color>
-    <color name="category_list_color">#81BFF1</color>
+    <color name="category_list_color">#1E88E5</color>
+    <color name="product_info">#FFEB3B</color>
+    <color name="my_cart_background">#BA92C1EA</color>
 </resources>

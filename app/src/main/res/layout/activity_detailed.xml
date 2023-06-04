@@ -6,16 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".activities.DetailedActivity">
 
+
     <ImageView
+        android:id="@+id/detailed_img"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/detailed_img"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailed_toolbar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailed_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_background"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="6dp"/>
+        app:title="Informacje o produkcie"
+        app:titleTextColor="@color/white"
+        android:background="@color/category_list_color"
+        />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
@@ -176,7 +188,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardview"
-        app:layout_constraintVertical_bias="0.344"
+        app:layout_constraintVertical_bias="0.195"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
@@ -194,7 +206,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_to_cart"
-        app:layout_constraintVertical_bias="0.272"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent=".8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
