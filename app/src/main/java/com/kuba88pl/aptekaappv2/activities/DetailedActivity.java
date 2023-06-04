@@ -82,12 +82,6 @@ public class DetailedActivity extends AppCompatActivity {
         addItems = findViewById(R.id.add_item);
         removeItems = findViewById(R.id.remove_item);
 
-//        addItems.bringToFront();
-//        removeItems.bringToFront();
-//        quantity.bringToFront();
-
-
-
         //New Products
         if(newProductsModel != null) {
             Glide.with(getApplicationContext()).load(newProductsModel.getImg_url()).into(detailedImg);
@@ -103,8 +97,33 @@ public class DetailedActivity extends AppCompatActivity {
 
             totalQuantityToString = String.valueOf(totalQuantity);
             totalQuantityToInt = Integer.parseInt(totalQuantityToString);
-            totalQuantity += totalQuantityToInt;
-//            totalPrice = newProductsModel.getPrice() * totalQuantity;
+            totalQuantity = totalQuantityToInt;
+
+            addItems.setClickable(true);
+
+            addItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        totalQuantity++;
+                        totalQuantityToString = String.valueOf(totalQuantity);
+                        totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                        totalQuantity = totalQuantityToInt;
+                        quantity.setText(String.valueOf(totalQuantityToString));
+                }
+            });
+
+            removeItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        totalQuantity--;
+                        totalQuantityToString = String.valueOf(totalQuantity);
+                        totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                        totalQuantity = totalQuantityToInt;
+                        quantity.setText(totalQuantityToString);
+
+                }
+            });
+
 
         }
 
@@ -125,8 +144,30 @@ public class DetailedActivity extends AppCompatActivity {
             totalQuantityToInt = Integer.parseInt(totalQuantityToString);
             totalQuantity += totalQuantityToInt;
 
-//            totalPrice = popularProductsModel.getPrice() * totalQuantity;
+            addItems.setClickable(true);
 
+            addItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    totalQuantity++;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(String.valueOf(totalQuantityToString));
+                }
+            });
+
+            removeItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    totalQuantity--;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(totalQuantityToString);
+
+                }
+            });
 
         }
 
@@ -146,7 +187,31 @@ public class DetailedActivity extends AppCompatActivity {
             totalQuantityToString = String.valueOf(totalQuantity);
             totalQuantityToInt = Integer.parseInt(totalQuantityToString);
             totalQuantity += totalQuantityToInt;
-//            totalPrice = showAllModel.getPrice() * totalQuantity;
+
+            addItems.setClickable(true);
+
+            addItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    totalQuantity++;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(String.valueOf(totalQuantityToString));
+                }
+            });
+
+            removeItems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    totalQuantity--;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(totalQuantityToString);
+
+                }
+            });
 
         }
 
@@ -187,44 +252,7 @@ public class DetailedActivity extends AppCompatActivity {
                     }
                 });
 
-        addItems.setClickable(true);
-
-        addItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(DetailedActivity.this,
-                        "The favorite list would appear on clicking this icon",
-                        Toast.LENGTH_LONG).show();
-                if (totalQuantity < 10) {
-                    totalQuantity++;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
-                    totalQuantity = totalQuantityToInt;
-                    quantity.setText(totalQuantityToString);
-                }
-            }
-        });
-
-
-
-
-        removeItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(totalQuantity > 1){
-                    totalQuantity--;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
-                    totalQuantity = totalQuantityToInt;
-                    quantity.setText(totalQuantityToString);
-                }
-            }
-        });
-
     }
-
-
 }
 
 
