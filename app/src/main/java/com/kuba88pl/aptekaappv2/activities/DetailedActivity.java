@@ -38,11 +38,15 @@ public class DetailedActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     int totalQuantity = 1;
+    String quantityToString; // tutaj pobieram wartosc quantity z edittext
+    int quantityToInt = 0;
     int totalPrice = 0;
     String totalPriceToString; //tutaj wynik finalny - to ma wyswietlac activity
     int totalPricetoInt; // na potrzeby dodawania cen lub przypisania wartosci do int totalPrice;
     String totalQuantityToString; // to ma wyswietlac activity
     int totalQuantityToInt;
+    int priceToInt;
+    String priceToString;
 
     //New Products
     NewProductsModel newProductsModel = null;
@@ -91,6 +95,8 @@ public class DetailedActivity extends AppCompatActivity {
         addItems = findViewById(R.id.add_item);
         removeItems = findViewById(R.id.remove_item);
 
+
+
         //New Products
         if (newProductsModel != null) {
             Glide.with(getApplicationContext()).load(newProductsModel.getImg_url()).into(detailedImg);
@@ -99,37 +105,53 @@ public class DetailedActivity extends AppCompatActivity {
             description.setText(newProductsModel.getDescription());
             price.setText(String.valueOf(newProductsModel.getPrice()));
 
-            totalPriceToString = newProductsModel.getPrice();
-            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
-            totalPriceToString = String.valueOf(totalPricetoInt);
-            totalPrice += totalPricetoInt; //totalprice
+//            quantityToString = quantity.getText().toString();
+//            quantityToInt = Integer.parseInt(quantityToString);
+//
+//            totalPriceToString = newProductsModel.getPrice();
+//            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
+//            totalPriceToString = String.valueOf(totalPricetoInt);
+//            totalPrice += totalPricetoInt; //totalprice
 
-            totalQuantityToString = String.valueOf(totalQuantity);
-            totalQuantityToInt = Integer.parseInt(totalQuantityToString);
-            totalQuantity = totalQuantityToInt;
+//            totalQuantityToString = String.valueOf(totalQuantity);
+//            totalQuantityToInt = Integer.parseInt(totalQ
+//            uantityToString);
+//            totalQuantity = totalQuantityToInt;
+            priceToString = price.getText().toString();
+            priceToInt = Integer.parseInt(priceToString);
+            quantityToString = quantity.getText().toString(); // wartosc pobrana z pola edittext
+            quantityToInt = Integer.parseInt(quantityToString); // ta sama wartosc sparsowana na int
+//            totalPriceToString = newProductsModel.getPrice(); // pobranie ceny produktu
+//            totalPricetoInt = Integer.parseInt(totalPriceToString); // ta sama cena ale przerobiona do int
+            priceToInt = priceToInt * quantityToInt;
+            priceToString = String.valueOf(priceToInt);
 
             addItems.setClickable(true);
 
             addItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    totalQuantity++;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    quantityToInt++;
+                    quantityToString = String.valueOf(quantityToInt);
+                    totalQuantityToInt = Integer.parseInt(quantityToString);
                     totalQuantity = totalQuantityToInt;
-                    quantity.setText(String.valueOf(totalQuantityToString));
+                    quantity.setText(String.valueOf(totalQuantity));
                 }
             });
 
             removeItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    totalQuantity--;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
-                    totalQuantity = totalQuantityToInt;
-                    quantity.setText(totalQuantityToString);
+                    if (totalQuantity <= 0) {
+                        Toast.makeText(DetailedActivity.this, "Mniej sie nie da", Toast.LENGTH_SHORT).show();
+                    } else {
+                        quantityToInt--;
+                        quantityToString = String.valueOf(quantityToInt);
+                        totalQuantityToInt = Integer.parseInt(quantityToString);
+                        totalQuantity = totalQuantityToInt;
+                        quantity.setText(String.valueOf(totalQuantity));
 
+                    }
                 }
             });
 
@@ -169,10 +191,10 @@ public class DetailedActivity extends AppCompatActivity {
             removeItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    totalQuantity--;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
-                    totalQuantity = totalQuantityToInt;
+                    quantityToInt--;
+                    quantityToString = String.valueOf(quantityToInt);
+                    quantityToInt = Integer.parseInt(totalPriceToString);
+                    quantityToInt = totalQuantityToInt;
                     quantity.setText(totalQuantityToString);
 
                 }
