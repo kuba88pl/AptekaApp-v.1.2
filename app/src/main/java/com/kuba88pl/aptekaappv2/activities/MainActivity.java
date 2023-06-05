@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.kuba88pl.aptekaappv2.R;
 import com.kuba88pl.aptekaappv2.fragments.HomeFragment;
 
@@ -21,6 +22,22 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
 
     Toolbar toolbar;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if(currentUser == null){
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            reload();
+        }
+    }
+
+    private void reload() {
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

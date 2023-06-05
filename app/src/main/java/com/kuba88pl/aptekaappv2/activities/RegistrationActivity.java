@@ -103,4 +103,5 @@ public class RegistrationActivity extends AppCompatActivity {
     public void signin(View view) {
         startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
     }
+
 }

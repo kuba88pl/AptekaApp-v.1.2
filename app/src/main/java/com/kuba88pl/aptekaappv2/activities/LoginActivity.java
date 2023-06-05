@@ -35,6 +35,19 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if(currentUser != null){
+            reload();
+        }
+    }
+
+    private void reload() {
+    }
+    // [END on_start
 
     public void signIn(View view) {
 

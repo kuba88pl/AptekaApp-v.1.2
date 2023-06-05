@@ -70,11 +70,11 @@ public class DetailedActivity extends AppCompatActivity {
 
         final Object obj = getIntent().getSerializableExtra("detailed");
 
-        if(obj instanceof NewProductsModel){
+        if (obj instanceof NewProductsModel) {
             newProductsModel = (NewProductsModel) obj;
-        } else if(obj instanceof PopularProductsModel) {
+        } else if (obj instanceof PopularProductsModel) {
             popularProductsModel = (PopularProductsModel) obj;
-        } else if(obj instanceof ShowAllModel) {
+        } else if (obj instanceof ShowAllModel) {
             showAllModel = (ShowAllModel) obj;
         }
 
@@ -92,7 +92,7 @@ public class DetailedActivity extends AppCompatActivity {
         removeItems = findViewById(R.id.remove_item);
 
         //New Products
-        if(newProductsModel != null) {
+        if (newProductsModel != null) {
             Glide.with(getApplicationContext()).load(newProductsModel.getImg_url()).into(detailedImg);
             name.setText(newProductsModel.getName());
             rating.setText(newProductsModel.getRating());
@@ -113,22 +113,22 @@ public class DetailedActivity extends AppCompatActivity {
             addItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                        totalQuantity++;
-                        totalQuantityToString = String.valueOf(totalQuantity);
-                        totalQuantityToInt = Integer.parseInt(totalPriceToString);
-                        totalQuantity = totalQuantityToInt;
-                        quantity.setText(String.valueOf(totalQuantityToString));
+                    totalQuantity++;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(String.valueOf(totalQuantityToString));
                 }
             });
 
             removeItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        totalQuantity--;
-                        totalQuantityToString = String.valueOf(totalQuantity);
-                        totalQuantityToInt = Integer.parseInt(totalPriceToString);
-                        totalQuantity = totalQuantityToInt;
-                        quantity.setText(totalQuantityToString);
+                    totalQuantity--;
+                    totalQuantityToString = String.valueOf(totalQuantity);
+                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    totalQuantity = totalQuantityToInt;
+                    quantity.setText(totalQuantityToString);
 
                 }
             });
@@ -137,7 +137,7 @@ public class DetailedActivity extends AppCompatActivity {
         }
 
         //Popular Products
-        if(popularProductsModel != null) {
+        if (popularProductsModel != null) {
             Glide.with(getApplicationContext()).load(popularProductsModel.getImg_url()).into(detailedImg);
             name.setText(popularProductsModel.getName());
             rating.setText(popularProductsModel.getRating());
@@ -181,7 +181,7 @@ public class DetailedActivity extends AppCompatActivity {
         }
 
         //Show All Products
-        if(showAllModel != null) {
+        if (showAllModel != null) {
             Glide.with(getApplicationContext()).load(showAllModel.getImg_url()).into(detailedImg);
             name.setText(showAllModel.getName());
             rating.setText(showAllModel.getRating());
@@ -228,18 +228,18 @@ public class DetailedActivity extends AppCompatActivity {
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(DetailedActivity.this, AddressActivity.class);
+                Intent intent = new Intent(DetailedActivity.this, AddressActivity.class);
 
                 if (newProductsModel != null) {
                     intent.putExtra("item", newProductsModel);
                 }
-                if (popularProductsModel != null ) {
+                if (popularProductsModel != null) {
                     intent.putExtra("item", popularProductsModel);
                 }
                 if (showAllModel != null) {
                     intent.putExtra("item", showAllModel);
                 }
-               startActivity(intent);
+                startActivity(intent);
 
             }
         });
