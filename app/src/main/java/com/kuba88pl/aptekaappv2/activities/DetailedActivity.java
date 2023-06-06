@@ -40,7 +40,7 @@ public class DetailedActivity extends AppCompatActivity {
     int totalQuantity = 1;
     String quantityToString; // tutaj pobieram wartosc quantity z edittext
     int quantityToInt = 0;
-    int totalPrice = 0;
+    int totalPrice;
     String totalPriceToString; //tutaj wynik finalny - to ma wyswietlac activity
     int totalPricetoInt; // na potrzeby dodawania cen lub przypisania wartosci do int totalPrice;
     String totalQuantityToString; // to ma wyswietlac activity
@@ -96,7 +96,6 @@ public class DetailedActivity extends AppCompatActivity {
         removeItems = findViewById(R.id.remove_item);
 
 
-
         //New Products
         if (newProductsModel != null) {
             Glide.with(getApplicationContext()).load(newProductsModel.getImg_url()).into(detailedImg);
@@ -105,37 +104,28 @@ public class DetailedActivity extends AppCompatActivity {
             description.setText(newProductsModel.getDescription());
             price.setText(String.valueOf(newProductsModel.getPrice()));
 
-//            quantityToString = quantity.getText().toString();
-//            quantityToInt = Integer.parseInt(quantityToString);
-//
-//            totalPriceToString = newProductsModel.getPrice();
-//            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
-//            totalPriceToString = String.valueOf(totalPricetoInt);
-//            totalPrice += totalPricetoInt; //totalprice
-
-//            totalQuantityToString = String.valueOf(totalQuantity);
-//            totalQuantityToInt = Integer.parseInt(totalQ
-//            uantityToString);
-//            totalQuantity = totalQuantityToInt;
-            priceToString = price.getText().toString();
-            priceToInt = Integer.parseInt(priceToString);
-            quantityToString = quantity.getText().toString(); // wartosc pobrana z pola edittext
-            quantityToInt = Integer.parseInt(quantityToString); // ta sama wartosc sparsowana na int
-//            totalPriceToString = newProductsModel.getPrice(); // pobranie ceny produktu
-//            totalPricetoInt = Integer.parseInt(totalPriceToString); // ta sama cena ale przerobiona do int
-            priceToInt = priceToInt * quantityToInt;
-            priceToString = String.valueOf(priceToInt);
 
             addItems.setClickable(true);
 
             addItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    price.setText(String.valueOf(newProductsModel.getPrice()));
                     quantityToInt++;
                     quantityToString = String.valueOf(quantityToInt);
                     totalQuantityToInt = Integer.parseInt(quantityToString);
                     totalQuantity = totalQuantityToInt;
                     quantity.setText(String.valueOf(totalQuantity));
+
+                    priceToString = price.getText().toString(); // 1. pobiera cene z TextView
+                    priceToInt = Integer.parseInt(priceToString); // 2. przerabia ją na int
+                    quantityToString = quantity.getText().toString(); // 3. pobiera ilosc z TextView
+                    quantityToInt = Integer.parseInt(quantityToString); // 4. przerabia ją na int
+                    totalPrice = priceToInt * quantityToInt; // 5. mnoży te 2 wartości int i zapisuje w zmienneij int totalPrice
+                    //**************************************************
+                    priceToString = String.valueOf(totalPrice); // 6. Przerabia totalPrice na String, zeby mogl zapisac w Firestore
+                    //**************************************************
+                    price.setText(priceToString); //7. ustawia cene w detailedActivity na cene wszystkich kupionych produktow
                 }
             });
 
@@ -143,15 +133,34 @@ public class DetailedActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (totalQuantity <= 0) {
-                        Toast.makeText(DetailedActivity.this, "Mniej sie nie da", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailedActivity.this, "Mniej się nie da", Toast.LENGTH_SHORT).show();
                     } else {
-                        quantityToInt--;
-                        quantityToString = String.valueOf(quantityToInt);
-                        totalQuantityToInt = Integer.parseInt(quantityToString);
-                        totalQuantity = totalQuantityToInt;
-                        quantity.setText(String.valueOf(totalQuantity));
+                        price.setText(String.valueOf(newProductsModel.getPrice()));
+                        priceToString = price.getText().toString();
+                        priceToInt = Integer.parseInt(priceToString);
+                        quantityToString = quantity.getText().toString();
+                        quantityToInt = Integer.parseInt(quantityToString);
+
+                        if (quantityToInt > 0) {
+                            quantityToInt--;
+                            quantity.setText(String.valueOf(quantityToInt));
+                        } else {
+                            Toast.makeText(DetailedActivity.this, "Mniej się nie da", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        totalPrice = priceToInt * quantityToInt;
+
+                        if (totalQuantityToInt <= 0) {
+                            totalPrice = 0;
+                            price.setText("0");
+                        } else {
+                            priceToString = String.valueOf(totalPrice);
+                            price.setText(priceToString);
+                        }
 
                     }
+
                 }
             });
 
@@ -292,7 +301,7 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("productPrice", price.getText().toString());
         cartMap.put("currentTime", saveCurrentTime);
         cartMap.put("currentDate", saveCurrentDate);
-        cartMap.put("totalQuantity", totalQuantityToString);
+        cartMap.put("totalQuantity", quantityToString);
         cartMap.put("totalPrice", totalPrice);
 
         firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())

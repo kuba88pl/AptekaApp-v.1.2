@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kuba88pl.aptekaappv2.R;
 import com.kuba88pl.aptekaappv2.adapters.MyCartAdapter;
+import com.kuba88pl.aptekaappv2.adapters.PopularProductsAdapter;
 import com.kuba88pl.aptekaappv2.models.MyCartModel;
+import com.kuba88pl.aptekaappv2.models.PopularProductsModel;
 import com.kuba88pl.aptekaappv2.models.ShowAllModel;
 
 import org.w3c.dom.Text;
@@ -39,6 +42,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<MyCartModel> cartModelList;
     MyCartAdapter cartAdapter;
+    Button buy;
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
 
