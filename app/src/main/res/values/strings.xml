@@ -38,6 +38,15 @@ DEFINICJE
 
 
 </string>
+
+    <string name="ending">
+        Był to projekt aplikacji zaliczeniowej, wykonany przez:
+
+Sebastiana, Marię i Jakuba.
+
+Zdajemy sobie sprawę z jego niedoskonałości, ale wciąż się uczymy :)
+Dziękujemy za poświęcony czas i obiecujemy, że będziemy nad nim pracować i ulepszać jego funkcjonalności.
+    </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
