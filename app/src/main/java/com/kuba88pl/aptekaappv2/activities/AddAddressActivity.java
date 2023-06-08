@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,20 +65,21 @@ public class AddAddressActivity extends AppCompatActivity {
                 }
 
                 if(!userCity.isEmpty()) {
-                    final_address += userCity;
+                    final_address += " " + userCity;
                 }
 
                 if (!userAddress.isEmpty()) {
-                    final_address += userAddress;
+                    final_address += " " + userAddress;
                 }
 
                 if(!userCode.isEmpty()) {
-                    final_address += userCode;
+                    final_address += " " + userCode;
                 }
 
                 if(!userNumber.isEmpty()){
-                    final_address += userNumber;
+                    final_address += " " + userNumber;
                 }
+
 
                 if (!userName.isEmpty() && !userCity.isEmpty() && !userAddress.isEmpty() && !userCode.isEmpty() && !userNumber.isEmpty()) {
 
