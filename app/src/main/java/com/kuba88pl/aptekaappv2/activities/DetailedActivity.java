@@ -314,7 +314,7 @@ public class DetailedActivity extends AppCompatActivity {
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DetailedActivity.this, AddAddressActivity.class);
+                Intent intent = new Intent(DetailedActivity.this, AddressActivity.class);
 
                 if (newProductsModel != null) {
                     intent.putExtra("item", newProductsModel);

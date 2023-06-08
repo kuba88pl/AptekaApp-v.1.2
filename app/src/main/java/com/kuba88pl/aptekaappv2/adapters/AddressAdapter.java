@@ -1,5 +1,6 @@
 package com.kuba88pl.aptekaappv2.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.kuba88pl.aptekaappv2.R;
 import com.kuba88pl.aptekaappv2.models.AddressModel;
 
@@ -19,18 +18,17 @@ import java.util.List;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
 
+
     Context context;
     List<AddressModel> addressModelList;
-    SelectedAddress selectedAddress;
-//    FirebaseAuth auth;
-//    FirebaseFirestore firestore;
+    SellectedAddress selectedAddress;
 
     private RadioButton selectedRadioBtn;
 
-    public AddressAdapter(Context context, List<AddressModel> addressModelList, SelectedAddress selectedAddress) {
+    public AddressAdapter(Context context, List<AddressModel> addressModelList, SellectedAddress sellectedAddress) {
         this.context = context;
         this.addressModelList = addressModelList;
-        this.selectedAddress = selectedAddress;
+        this.selectedAddress = sellectedAddress;
     }
 
     @NonNull
@@ -40,26 +38,23 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-//        auth = FirebaseAuth.getInstance();
-//        firestore = FirebaseFirestore.getInstance();
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.address.setText(addressModelList.get(position).getUserAddress());
         holder.radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (AddressModel address : addressModelList) {
-                    address.setSelected(false);
+                for(AddressModel addressModel:addressModelList) {
+                    addressModel.setSelected(false);
                 }
                 addressModelList.get(position).setSelected(true);
 
-                if (selectedRadioBtn != null) {
+                if(selectedRadioBtn != null) {
                     selectedRadioBtn.setChecked(false);
                 }
                 selectedRadioBtn = (RadioButton) view;
                 selectedRadioBtn.setChecked(true);
                 selectedAddress.setAddress(addressModelList.get(position).getUserAddress());
+
             }
         });
 
@@ -74,16 +69,17 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
         TextView address;
         RadioButton radioButton;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             address = itemView.findViewById(R.id.address_add);
             radioButton = itemView.findViewById(R.id.select_address);
         }
     }
 
-    public interface SelectedAddress {
+    public interface SellectedAddress {
         void setAddress(String address);
     }
-
 }
+
+
