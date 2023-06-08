@@ -175,39 +175,67 @@ public class DetailedActivity extends AppCompatActivity {
             description.setText(popularProductsModel.getDescription());
             price.setText(String.valueOf(popularProductsModel.getPrice()));
 
-            totalPriceToString = popularProductsModel.getPrice();
-            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
-            totalPriceToString = String.valueOf(totalPricetoInt);
-            totalPrice += totalPricetoInt;
 
-            totalQuantityToString = String.valueOf(totalQuantity);
-            totalQuantityToInt = Integer.parseInt(totalQuantityToString);
-            totalQuantity += totalQuantityToInt;
 
             addItems.setClickable(true);
 
             addItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    totalQuantity++;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    price.setText(String.valueOf(popularProductsModel.getPrice()));
+                    quantityToInt++;
+                    quantityToString = String.valueOf(quantityToInt);
+                    totalQuantityToInt = Integer.parseInt(quantityToString);
                     totalQuantity = totalQuantityToInt;
-                    quantity.setText(String.valueOf(totalQuantityToString));
+                    quantity.setText(String.valueOf(totalQuantity));
+
+                    priceToString = price.getText().toString(); // 1. pobiera cene z TextView
+                    priceToInt = Integer.parseInt(priceToString); // 2. przerabia ją na int
+                    quantityToString = quantity.getText().toString(); // 3. pobiera ilosc z TextView
+                    quantityToInt = Integer.parseInt(quantityToString); // 4. przerabia ją na int
+                    totalPrice = priceToInt * quantityToInt; // 5. mnoży te 2 wartości int i zapisuje w zmienneij int totalPrice
+                    //**************************************************
+                    priceToString = String.valueOf(totalPrice); // 6. Przerabia totalPrice na String, zeby mogl zapisac w Firestore
+                    //**************************************************
+                    price.setText(priceToString); //7. ustawia cene w detailedActivity na cene wszystkich kupionych produktow
                 }
             });
 
             removeItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    quantityToInt--;
-                    quantityToString = String.valueOf(quantityToInt);
-                    quantityToInt = Integer.parseInt(totalPriceToString);
-                    quantityToInt = totalQuantityToInt;
-                    quantity.setText(totalQuantityToString);
+                    if (totalQuantity <= 0) {
+                        Toast.makeText(DetailedActivity.this, "Mniej się nie da", Toast.LENGTH_SHORT).show();
+                    } else {
+                        price.setText(String.valueOf(popularProductsModel.getPrice()));
+                        priceToString = price.getText().toString();
+                        priceToInt = Integer.parseInt(priceToString);
+                        quantityToString = quantity.getText().toString();
+                        quantityToInt = Integer.parseInt(quantityToString);
+
+                        if (quantityToInt > 0) {
+                            quantityToInt--;
+                            quantity.setText(String.valueOf(quantityToInt));
+                        } else {
+                            Toast.makeText(DetailedActivity.this, "Mniej się nie da", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        totalPrice = priceToInt * quantityToInt;
+
+                        if (totalQuantityToInt <= 0) {
+                            totalPrice = 0;
+                            price.setText("0");
+                        } else {
+                            priceToString = String.valueOf(totalPrice);
+                            price.setText(priceToString);
+                        }
+
+                    }
 
                 }
             });
+
 
         }
 
@@ -219,39 +247,66 @@ public class DetailedActivity extends AppCompatActivity {
             description.setText(showAllModel.getDescription());
             price.setText(String.valueOf(showAllModel.getPrice()));
 
-            totalPriceToString = showAllModel.getPrice();
-            totalPricetoInt = Integer.parseInt(totalPriceToString) * totalQuantity;
-            totalPriceToString = String.valueOf(totalPricetoInt);
-            totalPrice += totalPricetoInt;
-
-            totalQuantityToString = String.valueOf(totalQuantity);
-            totalQuantityToInt = Integer.parseInt(totalQuantityToString);
-            totalQuantity += totalQuantityToInt;
 
             addItems.setClickable(true);
 
             addItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    totalQuantity++;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
+                    price.setText(String.valueOf(showAllModel.getPrice()));
+                    quantityToInt++;
+                    quantityToString = String.valueOf(quantityToInt);
+                    totalQuantityToInt = Integer.parseInt(quantityToString);
                     totalQuantity = totalQuantityToInt;
-                    quantity.setText(String.valueOf(totalQuantityToString));
+                    quantity.setText(String.valueOf(totalQuantity));
+
+                    priceToString = price.getText().toString(); // 1. pobiera cene z TextView
+                    priceToInt = Integer.parseInt(priceToString); // 2. przerabia ją na int
+                    quantityToString = quantity.getText().toString(); // 3. pobiera ilosc z TextView
+                    quantityToInt = Integer.parseInt(quantityToString); // 4. przerabia ją na int
+                    totalPrice = priceToInt * quantityToInt; // 5. mnoży te 2 wartości int i zapisuje w zmienneij int totalPrice
+                    //**************************************************
+                    priceToString = String.valueOf(totalPrice); // 6. Przerabia totalPrice na String, zeby mogl zapisac w Firestore
+                    //**************************************************
+                    price.setText(priceToString); //7. ustawia cene w detailedActivity na cene wszystkich kupionych produktow
                 }
             });
 
             removeItems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    totalQuantity--;
-                    totalQuantityToString = String.valueOf(totalQuantity);
-                    totalQuantityToInt = Integer.parseInt(totalPriceToString);
-                    totalQuantity = totalQuantityToInt;
-                    quantity.setText(totalQuantityToString);
+                    if (totalQuantity <= 0) {
+                        Toast.makeText(DetailedActivity.this, "Mniej się nie da", Toast.LENGTH_SHORT).show();
+                    } else {
+                        price.setText(String.valueOf(showAllModel.getPrice()));
+                        priceToString = price.getText().toString();
+                        priceToInt = Integer.parseInt(priceToString);
+                        quantityToString = quantity.getText().toString();
+                        quantityToInt = Integer.parseInt(quantityToString);
+
+                        if (quantityToInt > 0) {
+                            quantityToInt--;
+                            quantity.setText(String.valueOf(quantityToInt));
+                        } else {
+                            Toast.makeText(DetailedActivity.this, "Mniej się nie da", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        totalPrice = priceToInt * quantityToInt;
+
+                        if (totalQuantityToInt <= 0) {
+                            totalPrice = 0;
+                            price.setText("0");
+                        } else {
+                            priceToString = String.valueOf(totalPrice);
+                            price.setText(priceToString);
+                        }
+
+                    }
 
                 }
             });
+
 
         }
 
