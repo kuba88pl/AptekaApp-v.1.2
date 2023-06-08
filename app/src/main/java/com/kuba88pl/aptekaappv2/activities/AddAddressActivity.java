@@ -52,49 +52,55 @@ public class AddAddressActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String userName = name.getText().toString();
-                String userAddress = address.getText().toString();
                 String userCity = city.getText().toString();
+                String userAddress = address.getText().toString();
                 String userCode = postalCode.getText().toString();
                 String userNumber = phoneNumber.getText().toString();
 
-                String final_address = " ";
+                String final_address = "";
 
                 if (!userName.isEmpty()) {
-                    final_address += " " + userName;
+                    final_address  += userName;
                 }
-                if (!userCity.isEmpty()) {
-                    final_address += " " + userCity;
+
+                if(!userCity.isEmpty()) {
+                    final_address += userCity;
                 }
+
                 if (!userAddress.isEmpty()) {
-                    final_address += " " + userAddress;
+                    final_address += userAddress;
                 }
-                if (!userCode.isEmpty()) {
-                    final_address += " " + userCode;
+
+                if(!userCode.isEmpty()) {
+                    final_address += userCode;
                 }
-                if (!userNumber.isEmpty()) {
-                    final_address += " " + userNumber;
+
+                if(!userNumber.isEmpty()){
+                    final_address += userNumber;
                 }
 
                 if (!userName.isEmpty() && !userCity.isEmpty() && !userAddress.isEmpty() && !userCode.isEmpty() && !userNumber.isEmpty()) {
-                    Map<String, String> map = new HashMap<>();
-                    map.put("userAdress", final_address);
 
-                    firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
-                            .collection("Address").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(AddAddressActivity.this, "Adres został dodany.", Toast.LENGTH_SHORT).show();
+                        Map<String, String> map = new HashMap<>();
+                        map.put("UserAddress", final_address);
+
+                        firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
+
+                                .collection("Address").add(map).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(AddAddressActivity.this, "Dodano adres", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                        else {
+                                            Toast.makeText(AddAddressActivity.this, "Błąd! Spróbuj ponownie!" + task.getException(), Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
                                     }
-                                }
-
-                            });
-                } else {
-                    Toast.makeText(AddAddressActivity.this, "Prosze wypełnić wszystkie pola!", Toast.LENGTH_SHORT).show();
+                                });
                 }
             }
         });
     }
-
-
 }
