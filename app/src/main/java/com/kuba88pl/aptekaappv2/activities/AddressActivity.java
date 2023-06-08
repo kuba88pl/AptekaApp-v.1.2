@@ -42,6 +42,15 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
     Button addAddressBtn, paymentBtn;
     Toolbar toolbar;
     String mAddress = "";
+
+    String newProductsAmount;
+    int newProductsAmountToInt;
+    String popularProductsAmount;
+    int popularProductsAmountToInt;
+    String showAllProducts;
+    int showAllProductsToInt;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +60,15 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Object obj = getIntent().getSerializableExtra("item");
+
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
         recyclerView = findViewById(R.id.address_recycler);
         paymentBtn = findViewById(R.id.payment_btn);
         addAddres = findViewById(R.id.add_address_btn);
-        addressAdd = findViewById(R.id.address_add);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         addressModelList = new ArrayList<>();
@@ -83,6 +94,31 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AddressActivity.this, PaymentActivity.class));
+
+                String amount = "0";
+
+                int totalAmount = 0;
+
+                if (obj instanceof NewProductsModel) {
+                    NewProductsModel newProductsModel = (NewProductsModel) obj;
+                    newProductsAmount = newProductsModel.getPrice();
+                    newProductsAmountToInt = Integer.valueOf(newProductsAmount);
+                }
+                if (obj instanceof PopularProductsModel) {
+                    PopularProductsModel popularProductsModel  = (PopularProductsModel) obj;
+                    popularProductsAmount = popularProductsModel.getPrice();
+                    popularProductsAmountToInt = Integer.valueOf(popularProductsAmount);
+                }
+                if (obj instanceof ShowAllModel) {
+                    ShowAllModel showAllModel = (ShowAllModel) obj;
+                    showAllProducts = showAllModel.getPrice();
+                    showAllProductsToInt = Integer.valueOf(showAllProducts);
+                }
+                Intent intent = new Intent(AddressActivity.this, PaymentActivity.class);
+                totalAmount = newProductsAmountToInt + popularProductsAmountToInt + showAllProductsToInt;
+                amount = String.valueOf(totalAmount);
+                intent.putExtra("totalAmount", amount);
+                startActivity(intent);
             }
         });
 
@@ -98,6 +134,5 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
     @Override
     public void setAddress(String address) {
         mAddress = address;
-        addressAdd.setText(address);
     }
 }

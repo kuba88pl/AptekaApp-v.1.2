@@ -40,7 +40,7 @@ public class DetailedActivity extends AppCompatActivity {
     int totalQuantity = 1;
     String quantityToString; // tutaj pobieram wartosc quantity z edittext
     int quantityToInt = 0;
-    int totalPrice;
+    int totalPrice = 0;
     String totalPriceToString; //tutaj wynik finalny - to ma wyswietlac activity
     int totalPricetoInt; // na potrzeby dodawania cen lub przypisania wartosci do int totalPrice;
     String totalQuantityToString; // to ma wyswietlac activity

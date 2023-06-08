@@ -42,7 +42,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<MyCartModel> cartModelList;
     MyCartAdapter cartAdapter;
-    Button buy;
+
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
 
@@ -57,11 +57,13 @@ public class CartActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         //get data from my cart adapter
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(mMessageReciver, new IntentFilter("MyTotalAmount"));
 
-        overAllAmount = findViewById(R.id.sum);
+
         recyclerView = findViewById(R.id.cart_rec);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         cartModelList = new ArrayList<>();

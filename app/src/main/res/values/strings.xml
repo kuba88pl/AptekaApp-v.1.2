@@ -3,10 +3,41 @@
     <string name="first_slide">Wszystko, czego potrzebujesz</string>
     <string name="second_slide">Wybierz swój produkt</string>
     <string name="third_slide">Szybka dostawa</string>
-    <string name="description">Zgromadzililśmy w jednym miejscu...Witaj w naszej Aptece Internetowej,
+    <string name="description">Witaj w naszej Aptece Internetowej,
 świeżej, pachnącej i całkiem nowej.
 Zaczniemy więc najpierw od przedstawienia,
-że dokonujesz zakupów w polskiej firmie bez obcego mienia.</string>
+że dokonujesz zakupów w polskiej firmie bez obcego mienia.
+
+Zarejestrowanej w Stargardzie pod numerem dwadzieścia jeden
+I, choć siedzibą naszą nie jest Wiedeń,
+Postaramy się zawsze doradzać kulturalnie,
+fachowo, mądrze, a ponad wszystko właściwe - naturalnie.
+</string>
+    <string name="description2">Opcje dostawy:
+Odbiór osobisty w siedzibie apteki:
+Apteka Dyżurna 11 Listopada 21a 73-110 Stargard
+
+Wysyłka:
+- Poczta Polska Pocztex Kurier 48 - płatność z góry 11 zł, za pobraniem – 17 zł;
+- InPost kurier24 - płatność z góry 15 zł, za pobraniem 20 zł;
+- DPD kurier – tylko płatność z góry 20 zł;
+- UPS kurier – tylko płatność z góry 20 zł;
+
+</string>
+
+    <string name="description3">
+REGULAMIN świadczenia usług i sprzedaży w
+Aptece Internetowej:
+
+§ 1
+DEFINICJE
+1. APTEKA INTERNETOWA aptekadyzurnastargard.pl (APTEKA, ADMINISTRATOR,) – prowadzący jednoosobową działalność gospodarczą zarejestrowaną w CEIDG w Stargardzie pod adresem 11 Listopada 21A 73-110 Stargard nr telefonu: 508 903 299, adres e-mail wsbaptekaapp@gmail.com, NIP 617 208 91 76 REGON 321565802
+2. HASŁO – to ciąg liter, cyfr i znaków, utworzonych samodzielnie przez Użytkownika w trakcie procesu rejestracji, niezbędny do dokonania autoryzacji w trakcie uzyskiwania każdorazowego dostępu do Konta,
+3. UŻYTKOWNIK/KLIENT – osoba fizyczna posiadająca pełną zdolność do czynności prawnych, a w wypadkach przewidzianych przez przepisy powszechnie obowiązujące, także osoba fizyczna posiadająca ograniczoną zdolność do czynności prawnych; osoba prawna albo jednostka organizacyjna nie posiadająca osobowości prawnej, której ustawa przyznaje zdolność prawną, a która zamierza zawrzeć lub zawarła umowę o świadczenie Usługi elektronicznej (Użytkownik) lub Umowę Sprzedaży (Klient).
+4. KODEKS CYWILNY – ustawa Kodeks cywilny z dn. 23 kwietnia 1964 r. (Dz. U. z 2018 r. poz. 1025)
+
+
+</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
